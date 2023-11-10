@@ -9,7 +9,8 @@ def show_menu():
           '4. Удалить запись ',
           '5. Найти абонента по номеру телефона',
           '6. Добавить абонента в справочник',
-          '7. Закончить работу', sep='\n')
+          '7. Закончить работу',
+          '8. Копировать данные', sep='\n')
     try:
         choice = int(input())
     except ValueError:
@@ -42,7 +43,17 @@ def work_with_phonebook():
             user_data = input('new data ')
             add_user(phone_book, user_data)
             write_txt('phonebook.txt', phone_book)
+        elif choice == 8:
+            string_number = int(input('номер строки для копирования '))
+            file_name = input('имя файла в который копировать ')
+            copy_data_to_other_file(file_name, string_number, phone_book)
+
         choice = show_menu()
+def copy_data_to_other_file(file_name, string_number, phone_book):
+    try:
+        write_txt(file_name, [phone_book[string_number]])
+    except IndexError:
+        print("строка", string_number, "отсутствует в справочнике")
 
 def read_txt(filename):
     phone_book = []
@@ -53,6 +64,8 @@ def read_txt(filename):
     return phone_book
 
 def write_txt(filename, phone_book):
+    print(phone_book)
+    print(filename)
     with open(filename, 'w', encoding='utf-8') as phout:
         for i in range(len(phone_book)):
             s=''
@@ -124,4 +137,5 @@ def add_user(phone_book, user_data):
 if __name__ == '__main__':
     work_with_phonebook()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Дополнить справочник возможностью копирования данных из одного файла в другой.
+# Пользователь вводит номер строки, которую необходимо перенести из одного файла в другой.
