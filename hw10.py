@@ -5,8 +5,8 @@ lst += ['human'] * 10
 random.shuffle(lst)
 data = pd.DataFrame({'whoAmI': lst})
 # data.head()
-print(data)
-pd.get_dummies(data['whoAmI'])
+# print(data)
+# pd.get_dummies(data['whoAmI'])
 # print(data['whoAmI'])
 head = set()
 for i in range(len(data['whoAmI'])):
